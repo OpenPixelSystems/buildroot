@@ -22,6 +22,7 @@ define HOST_IMX_MKIMAGE_INSTALL_CMDS
 	$(INSTALL) -D -m 755 $(@D)/iMX8M/mkimage_imx8 $(HOST_DIR)/bin/mkimage_imx8
 	$(INSTALL) -D -m 755 $(@D)/iMX8M/mkimage_fit_atf.sh $(HOST_DIR)/bin/mkimage_fit_atf.sh
 	$(INSTALL) -D -m 755 $(@D)/iMX8M/print_fit_hab.sh $(HOST_DIR)/bin/print_fit_hab.sh
+	$(INSTALL) -D -m 755 $(@D)/scripts/pad_image.sh $(HOST_DIR)/bin/pad_image.sh
 endef
 else
 # i.MX8 and i.MX8X
