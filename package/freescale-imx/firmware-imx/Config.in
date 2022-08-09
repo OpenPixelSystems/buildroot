@@ -82,6 +82,16 @@ config BR2_PACKAGE_FIRMWARE_IMX_DDR3
 
 endchoice # DDR training FW
 
+if BR2_PACKAGE_FIRMWARE_IMX_LPDDR4
+
+config BR2_PACKAGE_FIRMWARE_IMX_LPDDR4_VERSION
+	string "LPDDR4 Version"
+	help
+	  Use a specific version of the lpddr4_pmu_train_* binaries such
+	  as "202006".
+
+endif # BR2_PACKAGE_FIRMWARE_IMX_LPDDR4
+
 config BR2_PACKAGE_FIRMWARE_IMX_IMEM_LEN
 	hex "(LP)DDR IMEM padding length"
 	default 0x8000

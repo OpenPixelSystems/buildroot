@@ -38,15 +38,23 @@ endef
 
 ifeq ($(BR2_PACKAGE_FIRMWARE_IMX_LPDDR4),y)
 FIRMWARE_IMX_DDRFW_DIR = $(@D)/firmware/ddr/synopsys
+ifneq ($(BR2_PACKAGE_FIRMWARE_IMX_LPDDR4_VERSION), "")
+	FIRMWARE_IMX_LPDDR4_FW_VERSION = _$(BR2_PACKAGE_FIRMWARE_IMX_LPDDR4_VERSION)
+endif
 
 define FIRMWARE_IMX_INSTALL_IMAGE_DDR_FW
 	# Create padded versions of lpddr4_pmu_* and generate lpddr4_pmu_train_fw.bin.
 	# lpddr4_pmu_train_fw.bin is needed when generating imx8-boot-sd.bin
 	# which is done in post-image script.
+	@echo lpddr4_version: $(FIRMWARE_IMX_LPDDR4_FW_VERSION)
 	$(call FIRMWARE_IMX_PREPARE_DDR_FW, \
-		lpddr4_pmu_train_1d_imem,lpddr4_pmu_train_1d_dmem,lpddr4_pmu_train_1d_fw)
+		lpddr4_pmu_train_1d_imem$(FIRMWARE_IMX_LPDDR4_FW_VERSION),
+		lpddr4_pmu_train_1d_dmem$(FIRMWARE_IMX_LPDDR4_FW_VERSION),
+		lpddr4_pmu_train_1d_fw)
 	$(call FIRMWARE_IMX_PREPARE_DDR_FW, \
-		lpddr4_pmu_train_2d_imem,lpddr4_pmu_train_2d_dmem,lpddr4_pmu_train_2d_fw)
+		lpddr4_pmu_train_2d_imem$(FIRMWARE_IMX_LPDDR4_FW_VERSION),
+		lpddr4_pmu_train_2d_dmem$(FIRMWARE_IMX_LPDDR4_FW_VERSION),
+		lpddr4_pmu_train_2d_fw)
 	cat $(FIRMWARE_IMX_DDRFW_DIR)/lpddr4_pmu_train_1d_fw.bin \
 		$(FIRMWARE_IMX_DDRFW_DIR)/lpddr4_pmu_train_2d_fw.bin > \
 		$(BINARIES_DIR)/lpddr4_pmu_train_fw.bin
