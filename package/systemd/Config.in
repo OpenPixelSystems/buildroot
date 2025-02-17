@@ -164,6 +164,13 @@ config BR2_PACKAGE_SYSTEMD_BOOT_EFI_ARCH
 config BR2_PACKAGE_SYSTEMD_EFI
 	bool "enable EFI support"
 
+config BR2_PACKAGE_SYSTEMD_UKIFY
+	bool "systemd-ukify"
+	select BR2_PACKAGE_SYSTEMD_EFI
+	select BR2_PACKAGE_SYSTEMD_BOOT
+	help
+	  systemd-ukify is a tool to generate a Unified Kernel Image
+
 config BR2_PACKAGE_SYSTEMD_JOURNAL_REMOTE
 	bool "enable journal remote tools"
 	select BR2_PACKAGE_LIBCURL

@@ -100,7 +100,6 @@ SYSTEMD_CONF_OPTS += \
 	-Dinstall-tests=false \
 	-Dlog-message-verification=disabled \
 	-Dtmpfiles=true \
-	-Dukify=disabled \
 	-Dbpf-framework=disabled \
 	-Dvmlinux-h=disabled \
 	-Dumount-path=/usr/bin/umount \
@@ -664,6 +663,12 @@ else
 SYSTEMD_CONF_OPTS += -Defi=false
 endif
 
+ifeq ($(BR2_PACKAGE_SYSTEMD_UKIFY),y)
+SYSTEMD_CONF_OPTS += -Dukify=true
+else
+SYSTEMD_CONF_OPTS += -Dukify=false
+endif
+
 SYSTEMD_FALLBACK_HOSTNAME = $(call qstrip,$(BR2_TARGET_GENERIC_HOSTNAME))
 ifneq ($(SYSTEMD_FALLBACK_HOSTNAME),)
 SYSTEMD_CONF_OPTS += -Dfallback-hostname=$(SYSTEMD_FALLBACK_HOSTNAME)
@@ -978,7 +983,6 @@ HOST_SYSTEMD_CONF_OPTS = \
 	-Dinitrd=false \
 	-Dxdg-autostart=false \
 	-Dkernel-install=false \
-	-Dukify=disabled \
 	-Danalyze=false \
 	-Dbpf-framework=disabled \
 	-Dvmlinux-h=disabled \
@@ -1011,6 +1015,12 @@ HOST_SYSTEMD_CONF_OPTS = \
 	-Dp11kit=disabled \
 	-Dlibfido2=disabled \
 	-Dpcre2=disabled
+
+ifeq ($(BR2_PACKAGE_SYSTEMD_UKIFY),y)
+HOST_SYSTEMD_CONF_OPTS += -Dukify=true
+else
+HOST_SYSTEMD_CONF_OPTS += -Dukify=false
+endif
 
 HOST_SYSTEMD_DEPENDENCIES = \
 	$(BR2_COREUTILS_HOST_DEPENDENCY) \
