@@ -158,6 +158,9 @@ F:	package/dcron/
 F:	package/libxmlrpc/
 F:	package/python-docopt/
 
+N:	Amer Alshanawany <amer.alshanawany@openpixelsystems.com>
+F:	package/openems/
+
 N:	Anand Gadiyar <gadiyar@ti.com>
 F:	board/ti/am62x-sk/
 F:	board/ti/am64x-sk/

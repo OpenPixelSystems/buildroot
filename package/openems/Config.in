@@ -1,0 +1,10 @@
+menuconfig BR2_PACKAGE_OPENEMS
+	bool "OpenEMS"
+	help
+	  OpenEMS is an open-source, modular platform designed
+	  for energy management. It focuses on monitoring,
+	  controlling, and integrating energy storage with
+	  renewable energy sources. It also supports various
+	  complementary devices and services, such as electric
+	  vehicle charging stations, heat pumps, electrolysers,
+	  and time-of-use electricity tariffs.
