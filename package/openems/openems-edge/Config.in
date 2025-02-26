@@ -1,0 +1,10 @@
+config BR2_PACKAGE_OPENEMS_EDGE
+	bool "OpenEMS Edge"
+	depends on BR2_PACKAGE_OPENJDK
+	help
+	  runs on site, communicates with devices and
+	  services, collects data and executes control
+	  algorithms.
+
+comment "OpenEMS Edge needs OpenJDK"
+	depends on !BR2_PACKAGE_OPENJDK

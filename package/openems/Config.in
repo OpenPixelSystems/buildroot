@@ -8,3 +8,6 @@ menuconfig BR2_PACKAGE_OPENEMS
 	  complementary devices and services, such as electric
 	  vehicle charging stations, heat pumps, electrolysers,
 	  and time-of-use electricity tariffs.
+if BR2_PACKAGE_OPENEMS
+source "package/openems/openems-edge/Config.in"
+endif
