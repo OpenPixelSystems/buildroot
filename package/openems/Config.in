@@ -10,4 +10,5 @@ menuconfig BR2_PACKAGE_OPENEMS
 	  and time-of-use electricity tariffs.
 if BR2_PACKAGE_OPENEMS
 source "package/openems/openems-edge/Config.in"
+source "package/openems/openems-ui/Config.in"
 endif

@@ -1,0 +1,5 @@
+config BR2_PACKAGE_OPENEMS_UI
+	bool "OpenEMS UI"
+	help
+	  Real-time user interface for web browsers and
+	  smartphones.
