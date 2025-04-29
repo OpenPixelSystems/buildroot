@@ -9,6 +9,7 @@ UUU_SOURCE = uuu_source-uuu_$(UUU_VERSION).tar.gz
 UUU_SITE = https://github.com/nxp-imx/mfgtools/releases/download/uuu_$(UUU_VERSION)
 UUU_LICENSE = BSD 3-Clause "New" or "Revised" License
 UUU_LICENSE_FILES = LICENSE
+UUU_DEPENDENCIES = bzip2 libusb openssl tinyxml2 zlib zstd
 HOST_UUU_DEPENDENCIES = \
 	host-bzip2 \
 	host-libusb \
@@ -17,4 +18,5 @@ HOST_UUU_DEPENDENCIES = \
 	host-zlib \
 	host-zstd
 
+$(eval $(cmake-package))
 $(eval $(host-cmake-package))
