@@ -1,0 +1,13 @@
+config BR2_PACKAGE_HOST_EFITOOLS
+	bool "host efitools"
+	select BR2_PACKAGE_HOST_GNU_EFI
+	select BR2_PACKAGE_HOST_LIBOPENSSL_ENGINES
+	select BR2_PACKAGE_HOST_OPENSSL
+	select BR2_PACKAGE_HOST_OPENSSL_FORCE_LIBOPENSSL
+	help
+	  The efitools package provides utilities for managing UEFI
+	  Secure Boot keys and includes sample EFI applications.
+	  Binaries such as efi-readvar, efi-updatevar and
+	  cert-to-efi-sig-list are built for the target system.
+
+	  https://git.kernel.org/pub/scm/linux/kernel/git/jejb/efitools.git

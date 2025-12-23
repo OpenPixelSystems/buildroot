@@ -1,0 +1,27 @@
+From 09f491cec9aaf9156926f89abbf0aa2feaf99502 Mon Sep 17 00:00:00 2001
+From: Thomas Devoogdt <thomas.devoogdt@barco.com>
+Date: Thu, 4 Dec 2025 23:08:35 +0100
+Subject: [PATCH] Make.rules: allow to specify the target arch
+
+Upstream: Inappropriate [embedded specific]
+Signed-off-by: Thomas Devoogdt <thomas.devoogdt@barco.com>
+---
+ Make.rules | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Make.rules b/Make.rules
+index 2c08e48..ba42d75 100644
+--- a/Make.rules
++++ b/Make.rules
+@@ -1,7 +1,7 @@
+ EFISIGNED = $(patsubst %.efi,%-signed.efi,$(EFIFILES))
+ MANPAGES = $(patsubst doc/%.1.in,doc/%.1,$(wildcard doc/*.1.in))
+ HELP2MAN = help2man
+-ARCH	 = $(shell uname -m | sed 's/i.86/ia32/;s/arm.*/arm/')
++ARCH	?= $(shell uname -m | sed 's/i.86/ia32/;s/arm.*/arm/')
+ ifeq ($(ARCH),ia32)
+ ARCH3264 = -m32
+ else ifeq ($(ARCH),x86_64)
+-- 
+2.43.0
+

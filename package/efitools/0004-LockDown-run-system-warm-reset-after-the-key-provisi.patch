@@ -1,0 +1,45 @@
+From 09d14116bfb68da7d7b46301a28f8155cac58b14 Mon Sep 17 00:00:00 2001
+From: Lans Zhang <jia.zhang@windriver.com>
+Date: Fri, 25 Mar 2016 10:52:34 +0800
+Subject: [PATCH] LockDown: run system warm reset after the key provision
+ success
+
+In addition, BIOS would stop at its setup screen. The end user can thus
+enable UEFI secure boot immediately.
+
+Source: https://github.com/Wind-River/meta-secure-core/tree/c4f7798/meta-efi-secure-boot/recipes-bsp/efitools/efitools
+Upstream: Inappropriate [embedded specific]
+Signed-off-by: Lans Zhang <jia.zhang@windriver.com>
+Signed-off-by: Hendrik De Vloed <hendrik.devloed@dekimo.com>
+---
+ LockDown.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/LockDown.c b/LockDown.c
+index 29df9de..821985c 100644
+--- a/LockDown.c
++++ b/LockDown.c
+@@ -99,5 +99,20 @@ efi_main (EFI_HANDLE image, EFI_SYSTEM_TABLE *systab)
+ 	}
+ 	Print(L"Platform %s set to boot securely\n", SecureBoot ? L"is" : L"is not");
+ 
++	/* Reset system to go back the real UEFI secure boot flow.
++	 * If SecureBoot is still false, the user needs to turn on
++	 * UEFI secure boot in BIOS setup.
++	 */
++	Print(L"Prepare to execute system warm reset after 3 seconds ...\n");
++	if (!SecureBoot)
++	        Print(L"After warm reset, enter to BIOS setup to enable UEFI Secure Boot.\n");
++
++	BS->Stall(3000000);
++
++	if (!SecureBoot)
++	        SETOSIndicationsAndReboot(EFI_OS_INDICATIONS_BOOT_TO_FW_UI);
++	else
++	        RT->ResetSystem(EfiResetWarm, EFI_SUCCESS, 0, NULL);
++
+ 	return EFI_SUCCESS;
+ }
+-- 
+2.43.0
+
