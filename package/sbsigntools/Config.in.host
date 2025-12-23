@@ -1,0 +1,15 @@
+config BR2_PACKAGE_HOST_SBSIGNTOOLS
+	bool "host sbsigntools"
+	select BR2_PACKAGE_HOST_BINUTILS
+	select BR2_PACKAGE_HOST_GNU_EFI
+	select BR2_PACKAGE_HOST_GNU_EFI
+	select BR2_PACKAGE_HOST_LIBOPENSSL_ENGINES
+	select BR2_PACKAGE_HOST_OPENSSL
+	select BR2_PACKAGE_HOST_OPENSSL_FORCE_LIBOPENSSL
+	select BR2_PACKAGE_HOST_UTIL_LINUX
+	select BR2_PACKAGE_HOST_UTIL_LINUX_LIBUUID
+	help
+	  A Linux user-space application to sign and verify application
+	  for UEFI Secure Boot.
+
+	  https://git.kernel.org/pub/scm/linux/kernel/git/jejb/sbsigntools.git/about/

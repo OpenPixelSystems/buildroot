@@ -1,0 +1,19 @@
+config BR2_PACKAGE_SBSIGNTOOLS
+	bool "sbsigntools"
+	depends on BR2_PACKAGE_GNU_EFI_ARCH_SUPPORTS
+	depends on BR2_USE_WCHAR # binutils
+	select BR2_PACKAGE_BINUTILS
+	select BR2_PACKAGE_GNU_EFI
+	select BR2_PACKAGE_LIBOPENSSL_ENGINES
+	select BR2_PACKAGE_OPENSSL
+	select BR2_PACKAGE_OPENSSL_FORCE_LIBOPENSSL
+	select BR2_PACKAGE_UTIL_LINUX
+	select BR2_PACKAGE_UTIL_LINUX_LIBUUID
+	help
+	  A Linux user-space application to sign and verify application
+	  for UEFI Secure Boot.
+
+	  https://git.kernel.org/pub/scm/linux/kernel/git/jejb/sbsigntools.git/about/
+
+comment "sbsigntools needs a toolchain w/ wchar"
+	depends on !BR2_USE_WCHAR

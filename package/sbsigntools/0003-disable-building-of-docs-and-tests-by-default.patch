@@ -1,0 +1,34 @@
+From d07966827cfa7d4efd6aecf8d8e6d62e96d68bc6 Mon Sep 17 00:00:00 2001
+From: Hendrik De Vloed <hendrik.devloed@dekimo.com>
+Date: Wed, 3 Dec 2025 16:10:40 +0100
+Subject: [PATCH] disable building of docs and tests by default
+
+Upstream: N/A
+Signed-off-by: Hendrik De Vloed <hendrik.devloed@dekimo.com>
+---
+ Makefile.am  | 2 +-
+ configure.ac | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index d347e9b..336797b 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,2 +1,2 @@
+ 
+-SUBDIRS = lib/ccan src docs tests
++SUBDIRS = lib/ccan src
+diff --git a/configure.ac b/configure.ac
+index 7f38fb8..d2860cf 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -93,5 +93,5 @@ AC_SUBST(EFI_ARCH, $EFI_ARCH)
+ AC_SUBST(CRTPATH, $CRTPATH)
+ 
+ AC_CONFIG_FILES([Makefile src/Makefile lib/ccan/Makefile]
+-		[docs/Makefile tests/Makefile])
++		[ ])
+ AC_OUTPUT
+-- 
+2.43.0
+
