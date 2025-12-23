@@ -41,4 +41,21 @@ define GNU_EFI_INSTALL_STAGING_CMDS
 		INSTALLROOT=$(STAGING_DIR) install
 endef
 
+HOST_GNU_EFI_CONFIGURE_OPTS = \
+	$(HOST_CONFIGURE_OPTS) \
+	LDFLAGS="-rpath=$(HOST_DIR)/lib"
+
+HOST_GNU_EFI_MAKE_OPTS = \
+	PREFIX=/usr
+
+define HOST_GNU_EFI_BUILD_CMDS
+	$(HOST_GNU_EFI_CONFIGURE_OPTS) $(MAKE) -C $(@D) $(HOST_GNU_EFI_MAKE_OPTS)
+endef
+
+define HOST_GNU_EFI_INSTALL_CMDS
+	$(HOST_GNU_EFI_CONFIGURE_OPTS) $(MAKE) -C $(@D) $(HOST_GNU_EFI_MAKE_OPTS) \
+		INSTALLROOT=$(HOST_DIR) install
+endef
+
 $(eval $(generic-package))
+$(eval $(host-generic-package))
