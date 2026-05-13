@@ -20,6 +20,9 @@ define TAILSCALE_INSTALL_INIT_SYSTEMD
 		$(TARGET_DIR)/etc/default/tailscaled
 	$(INSTALL) -D -m 0644 $(@D)/cmd/tailscaled/tailscaled.service \
 		$(TARGET_DIR)/usr/lib/systemd/system/tailscaled.service
+	mkdir -p $(TARGET_DIR)/usr/lib/systemd/system/multi-user.target.wants
+	ln -sf ../tailscaled.service \
+		$(TARGET_DIR)/usr/lib/systemd/system/multi-user.target.wants/tailscaled.service
 endef
 
 define TAILSCALE_LINUX_CONFIG_FIXUPS
