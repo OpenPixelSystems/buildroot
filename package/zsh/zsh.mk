@@ -10,6 +10,8 @@ ZSH_SOURCE = zsh-$(ZSH_VERSION).tar.xz
 ZSH_DEPENDENCIES = ncurses
 ZSH_CONF_OPTS = --bindir=/bin
 ZSH_CONF_ENV = zsh_cv_sys_nis=no zsh_cv_sys_nis_plus=no
+# zsh 5.9 configure tests are not C23-compatible; force C17 for GCC 16+ toolchains
+ZSH_CONF_ENV += CFLAGS="$(TARGET_CFLAGS) -std=gnu17"
 ZSH_LICENSE = MIT-like
 ZSH_LICENSE_FILES = LICENCE
 ZSH_CPE_ID_VENDOR = zsh
