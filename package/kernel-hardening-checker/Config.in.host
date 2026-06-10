@@ -1,0 +1,8 @@
+config BR2_PACKAGE_HOST_KERNEL_HARDENING_CHECKER
+	bool "host kernel-hardening-checker"
+	help
+	  kernel-hardening-checker (formerly kconfig-hardened-check)
+	  is a tool for checking the security hardening options of the
+	  Linux kernel.
+
+	  https://github.com/a13xp0p0v/kernel-hardening-checker
