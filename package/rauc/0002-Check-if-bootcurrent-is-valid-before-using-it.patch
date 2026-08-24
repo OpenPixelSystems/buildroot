@@ -1,0 +1,39 @@
+From 7a98837da188a5e432d358534dbada6e73bae175 Mon Sep 17 00:00:00 2001
+From: Rhidian De Wit <rhidian.dewit@openpixelsystems.org>
+Date: Mon, 24 Aug 2026 11:00:44 +0200
+Subject: [PATCH 2/2] Check if bootcurrent is valid before using it
+
+Signed-off-by: Rhidian De Wit <rhidian.dewit@openpixelsystems.org>
+---
+ src/bootloaders/efi.c | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/src/bootloaders/efi.c b/src/bootloaders/efi.c
+index 631ea39d..15cbf417 100644
+--- a/src/bootloaders/efi.c
++++ b/src/bootloaders/efi.c
+@@ -510,12 +510,15 @@ gchar *r_efi_get_current_bootname(RaucConfig *config, GError **error)
+ 		return NULL;
+ 	}
+ 
+-	g_hash_table_iter_init(&iter, config->slots);
+-	while (g_hash_table_iter_next(&iter, NULL, (gpointer*) &slot)) {
+-		if (g_strcmp0(slot->bootname, bootcurrent->name) == 0) {
+-			return g_strdup(slot->bootname);
+-		}
+-	}
++  if (bootcurrent != NULL)
++  {
++    g_hash_table_iter_init(&iter, config->slots);
++    while (g_hash_table_iter_next(&iter, NULL, (gpointer*) &slot)) {
++      if (g_strcmp0(slot->bootname, bootcurrent->name) == 0) {
++        return g_strdup(slot->bootname);
++      }
++    }
++  }
+ 
+ 	g_set_error(error,
+ 			R_BOOTCHOOSER_ERROR,
+-- 
+2.51.0
+

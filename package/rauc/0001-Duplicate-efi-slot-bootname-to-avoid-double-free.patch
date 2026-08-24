@@ -1,0 +1,26 @@
+From 361383f6bffe355f3a47ab4029f6b0634c3f6b67 Mon Sep 17 00:00:00 2001
+From: Rhidian De Wit <rhidian.dewit@openpixelsystems.org>
+Date: Mon, 24 Aug 2026 11:00:00 +0200
+Subject: [PATCH 1/2] Duplicate efi slot bootname to avoid double free
+
+Signed-off-by: Rhidian De Wit <rhidian.dewit@openpixelsystems.org>
+---
+ src/bootloaders/efi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/bootloaders/efi.c b/src/bootloaders/efi.c
+index 889ccca4..631ea39d 100644
+--- a/src/bootloaders/efi.c
++++ b/src/bootloaders/efi.c
+@@ -513,7 +513,7 @@ gchar *r_efi_get_current_bootname(RaucConfig *config, GError **error)
+ 	g_hash_table_iter_init(&iter, config->slots);
+ 	while (g_hash_table_iter_next(&iter, NULL, (gpointer*) &slot)) {
+ 		if (g_strcmp0(slot->bootname, bootcurrent->name) == 0) {
+-			return slot->bootname;
++			return g_strdup(slot->bootname);
+ 		}
+ 	}
+ 
+-- 
+2.51.0
+
