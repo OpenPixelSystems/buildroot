@@ -1,0 +1,8 @@
+config BR2_TARGET_THUNDERCOMM_RBPI3_FIRMWARE
+	bool "thundercomm-rubik-pi3-boot-firmware"
+	depends on BR2_aarch64
+	help
+	  Bootloader and firmware files for Qualcomm-based RubikPi3
+	  development board.
+
+	  https://github.com/rubikpi-ai/boot-assets
