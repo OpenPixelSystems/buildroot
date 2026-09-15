@@ -1,0 +1,23 @@
+config BR2_PACKAGE_HOST_PTOOL
+	bool "host qualcomm ptool"
+	select BR2_PACKAGE_HOST_PYTHON3
+	help
+	  qcom-ptool contains various device partitioning utilities
+	  like ptool.py, gen_partitions.py and various sample
+	  partition configuration files needed for Qualcomm SoCs.
+
+	  https://github.com/qualcomm-linux/qcom-ptool
+
+if BR2_PACKAGE_HOST_PTOOL
+
+choice
+	prompt "ptool platform"
+	default BR2_PACKAGE_HOST_PTOOL_PLATFORM_RUBIKPI3
+
+config BR2_PACKAGE_HOST_PTOOL_PLATFORM_RUBIKPI3
+	bool "qcs6490-thundercomm-rubikpi3"
+	help
+	  Thundercomm RubikPi3 platform configuration for ptool.
+endchoice
+
+endif
