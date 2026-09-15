@@ -1,0 +1,7 @@
+config BR2_PACKAGE_HOST_QCA_SECTOOLS
+	bool "host qualcomm sectools"
+	help
+	  qualcomm sectools contain the tooling needed to build
+	  and flash a secure image for a Qualcomm SoC
+
+	  https://softwarecenter.qualcomm.com/catalog/item/Qualcomm_Security_Tools
