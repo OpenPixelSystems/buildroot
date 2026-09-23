@@ -12,3 +12,4 @@ PYTHON_WEBENCODINGS_LICENSE = BSD-3-Clause
 PYTHON_WEBENCODINGS_LICENSE_FILES = PKG-INFO
 
 $(eval $(python-package))
+$(eval $(host-python-package))

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_HOST_PYTHON_WEBENCODINGS
+	bool "host python-webencodings"
+	help
+	  Character encoding aliases for legacy web content.
+
+	  https://github.com/SimonSapin/python-webencodings
