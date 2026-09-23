@@ -14,3 +14,4 @@ PYTHON_HTML5LIB_CPE_ID_VENDOR = html5lib
 PYTHON_HTML5LIB_CPE_ID_PRODUCT = html5lib
 
 $(eval $(python-package))
+$(eval $(host-python-package))
