@@ -62,6 +62,8 @@ source "package/qt6/qt6svg/Config.in"
 source "package/qt6/qt6tools/Config.in"
 source "package/qt6/qt6virtualkeyboard/Config.in"
 source "package/qt6/qt6wayland/Config.in"
+source "package/qt6/qt6webchannel/Config.in"
+source "package/qt6/qt6webengine/Config.in"
 source "package/qt6/qt6websockets/Config.in"
 
 endif

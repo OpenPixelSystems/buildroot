@@ -1,0 +1,14 @@
+config BR2_PACKAGE_QT6WEBCHANNEL
+	bool "qt6webchannel"
+	help
+	  This package provides Qt6 WebChannel:
+
+	  https://doc.qt.io/qt-6/qtwebchannel-index.html
+	  https://code.qt.io/cgit/qt/qtwebchannel.git
+
+if BR2_PACKAGE_QT6WEBCHANNEL
+
+config BR2_PACKAGE_QT6WEBCHANNEL_QUICK
+	bool "quick module"
+	select BR2_PACKAGE_QT6DECLARATIVE_QUICK
+endif
