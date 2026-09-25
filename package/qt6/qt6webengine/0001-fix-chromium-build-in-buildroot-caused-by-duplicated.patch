@@ -1,0 +1,27 @@
+From a827b84caf49d19f0c21669e5a0bf8fbcba5a5a1 Mon Sep 17 00:00:00 2001
+From: Roy Kollen Svendsen <roykollensvendsen@gmail.com>
+Date: Tue, 24 Jun 2025 00:08:34 +0200
+Subject: [PATCH] fix chromium build in buildroot caused by duplicated path
+
+Upstream: N/A. Specific to Buildroot
+Signed-off-by: Rhidian De Wit <rhidiandewit@gmail.com>
+---
+ cmake/QtToolchainHelpers.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/QtToolchainHelpers.cmake b/cmake/QtToolchainHelpers.cmake
+index eaa3a4339..5b7a3f166 100644
+--- a/cmake/QtToolchainHelpers.cmake
++++ b/cmake/QtToolchainHelpers.cmake
+@@ -563,7 +563,7 @@ macro(append_toolchain_setup)
+             list(APPEND gnArgArg host_cpu="${cpu}")
+         endif()
+         if(CMAKE_SYSROOT)
+-            list(APPEND gnArgArg target_sysroot="${CMAKE_SYSROOT}")
++#            list(APPEND gnArgArg target_sysroot="${CMAKE_SYSROOT}")
+         endif()
+     elseif(MACOS)
+         get_gn_arch(cpu ${arch})
+-- 
+2.49.0
+

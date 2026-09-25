@@ -1,0 +1,84 @@
+config BR2_PACKAGE_QT6WEBENGINE_ARCH_SUPPORTS
+	bool
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n309
+	# May be extended to other arm variants later
+	default y if BR2_aarch64 || BR2_x86_64 || (BR2_arm && BR2_ARM_CPU_ARMV7A)
+	depends on BR2_HOSTARCH = "x86_64"
+
+comment "qt6webengine needs udev /dev management and a glibc toolchain w/ host gcc >= 10"
+	depends on BR2_PACKAGE_QT6WEBENGINE_ARCH_SUPPORTS
+	depends on !BR2_PACKAGE_HAS_UDEV || !BR2_TOOLCHAIN_USES_GLIBC || \
+		!BR2_HOST_GCC_AT_LEAST_10
+
+comment "qt6webengine needs an OpenGL and EGL-capable backend"
+	depends on BR2_PACKAGE_Q6WEBENGINE_ARCH_SUPPORTS
+	depends on !BR2_PACKAGE_QT6_GL_SUPPORTS || !BR2_PACKAGE_HAS_LIBEGL
+
+config BR2_PACKAGE_QT6WEBENGINE
+	bool "qt6webengine"
+	depends on BR2_PACKAGE_QT6WEBENGINE_ARCH_SUPPORTS
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n377
+	depends on BR2_TOOLCHAIN_USES_GLIBC
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n501
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n14
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n263
+	depends on BR2_HOST_GCC_AT_LEAST_10 # C++20
+	depends on BR2_PACKAGE_QT6_GL_SUPPORTS
+	depends on BR2_PACKAGE_HAS_LIBEGL
+	depends on BR2_PACKAGE_HAS_UDEV
+	depends on BR2_PACKAGE_HOST_PYTHON_HTML5LIB
+	select BR2_PACKAGE_LIBNSS
+	select BR2_PACKAGE_PYTHON_HTML5LIB
+	select BR2_PACKAGE_DBUS
+	select BR2_PACKAGE_FONTCONFIG
+	select BR2_PACKAGE_HOST_QT6BASE_NETWORK
+	select BR2_PACKAGE_QT6BASE_NETWORK
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n279
+	select BR2_PACKAGE_QT6BASE_GUI
+	select BR2_PACKAGE_QT6DECLARATIVE
+	select BR2_PACKAGE_QT6DECLARATIVE_QUICK
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n270
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n9
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/.cmake.conf?h=6.9.1#n3
+	select BR2_HOST_CMAKE_AT_LEAST_3_19
+	#https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n324
+	select BR2_PACKAGE_HOST_NODEJS
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/configure.cmake?h=6.9.1#n439
+	select BR2_PACKAGE_LIBDRM if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_LIBXKBCOMMON if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBX11 if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXCOMPOSITE if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXCURSOR if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXI if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXKBFILE if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXRANDR if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXSHMFENCE if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XLIB_LIBXTST if BR2_PACKAGE_QT6BASE_XCB
+	select BR2_PACKAGE_XORGPROTO if BR2_PACKAGE_QT6BASE_XCB
+	help
+	  This package provides Qt6 WebEngine:
+
+	  https://doc.qt.io/qt-6/qtwebengine-index.html
+	  https://code.qt.io/cgit/qt/qtwebengine.git/
+
+if BR2_PACKAGE_QT6WEBENGINE
+
+config BR2_PACKAGE_QT6WEBENGINE_PROPRIETARY_CODECS
+	bool "proprietary codecs"
+	help
+	  Enables the use of proprietary codecs such as h.264/h.265 and
+	  MP3.
+
+config BR2_PACKAGE_QT6WEBENGINE_SPELLCHECKER
+	bool "spellchecker"
+	help
+	  Provides a spellchecker.
+
+config BR2_PACKAGE_QT6WEBENGINE_WEBRTC
+	bool "webrtc"
+	# https://code.qt.io/cgit/qt/qtwebengine.git/tree/src/core/api/configure.cmake?h=6.9.1#n138
+	select BR2_PACKAGE_XLIB_LIBXDAMAGE if BR2_PACKAGE_QT6BASE_XCB
+	help
+	  Provides WebRTC support.
+
+endif
