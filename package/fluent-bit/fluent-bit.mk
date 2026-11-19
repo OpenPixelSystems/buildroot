@@ -76,7 +76,10 @@ endif
 
 #the systemd input plugin needs libsystemd, if not cmake disables it
 ifeq ($(BR2_PACKAGE_SYSTEMD),y)
+FLUENT_BIT_CONF_OPTS += -DFLB_IN_SYSTEMD=Yes
 FLUENT_BIT_DEPENDENCIES += systemd
+else
+FLUENT_BIT_CONF_OPTS += -DFLB_IN_SYSTEMD=No
 endif
 
 # Force bundled miniz to be linked statically.
